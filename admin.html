@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Naveen Photography — Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#160f14;--ivory:#f4ede3;--paper:#fbf7f1;--wine:#5e1f30;--wine2:#7a2c40;--brass:#b08d57;--line:rgba(22,15,20,.14);--muted:#6f6269;--danger:#b3261e;--ok:#2e7d4f;--serif:'Fraunces',Georgia,serif;--sans:'Instrument Sans',system-ui,sans-serif}
+:root{--ink:#1e1214;--ivory:#f5f1ee;--paper:#faf9f7;--wine:#4a1522;--wine2:#b5543c;--brass:#d4a030;--line:rgba(74,21,34,.12);--muted:#8a7a78;--danger:#c0392b;--ok:#27ae60;--serif:'DM Serif Display',Georgia,serif;--sans:'Jost',sans-serif}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;min-height:100vh}
 button{font-family:inherit}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
@@ -102,6 +102,39 @@ button{font-family:inherit}
 .toast{padding:12px 18px;font-size:14px;font-weight:500;color:#fff;background:var(--ink);max-width:320px;animation:t .25s}
 .toast.ok{background:var(--ok)}.toast.err{background:var(--danger)}
 @keyframes t{from{opacity:0;transform:translateY(8px)}}
+
+/* ── iKON-style admin look ── */
+.lbox{border-radius:0;border-top:3px solid var(--brass)}
+.lbox h1{font-style:italic;font-weight:400;color:var(--ink)}
+.lbox p{font-size:10px;letter-spacing:.35em;text-transform:uppercase}
+.lbox label{font-size:8.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--wine2)}
+.lbox button{font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:500}
+.top{border-bottom:1px solid rgba(212,160,48,.2);height:60px}
+.top .logo{font-style:italic;font-size:20px}
+.top .r{font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+.top button{border-radius:0;border-color:rgba(212,160,48,.35);color:var(--brass);font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+.head h1{font-weight:400;color:var(--wine);font-size:36px}
+.head{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:0}
+.stats{margin:32px 0 36px}
+.stat b{font-weight:400;color:var(--wine)}
+.stat span{font-size:8.5px;letter-spacing:.3em;text-transform:uppercase}
+.tabs{gap:0;border-bottom:1px solid var(--line);padding-bottom:0}
+.tab{background:none;border:0;border-bottom:2px solid transparent;border-radius:0;margin-bottom:-1px;padding:12px 18px;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.tab:hover{color:var(--wine);border-color:transparent}
+.tab.on{background:none;color:var(--wine);border-bottom-color:var(--wine)}
+.panel h2{font-weight:400;font-style:italic;color:var(--wine)}
+.note{background:rgba(212,160,48,.07);border:1px solid rgba(212,160,48,.25)}
+.drop{border-color:rgba(74,21,34,.2);border-radius:0}
+.drop:hover,.drop.over{border-color:var(--wine);background:rgba(74,21,34,.03)}
+.drop b{font-weight:400;color:var(--wine)}
+.item,.vcard,.addv,.hv{border-radius:0}
+.sm,.btn,.savebar button{border-radius:0;font-size:9px;letter-spacing:.25em;text-transform:uppercase;font-weight:600}
+.btn{background:var(--wine)}
+.btn:hover{background:var(--wine2)}
+.vcard .vt em{border-radius:0;letter-spacing:.2em;text-transform:uppercase;font-size:8px}
+.savebar{background:var(--wine);border-top:2px solid var(--brass)}
+.savebar button{background:var(--brass);color:#1a1000}
+.sm.del:hover{background:var(--danger)}
 </style>
 </head>
 <body>
@@ -151,6 +184,7 @@ const MAX_CAT=12, MAX_HERO=6, MAX_SNAP=24, MAX_VIDEOS=8;
 const IMG_SECTIONS = [
   {key:'heroImages', tab:'Hero', label:'Hero slideshow', max:MAX_HERO, desc:'Big photos behind the headline at the top of the site. They fade from one to the next. Use wide, high-quality landscape photos.'},
   {key:'aboutPhoto', tab:'About photo', label:'About photo', max:1, desc:'The portrait shown beside the About text. A vertical photo works best.'},
+  {key:'logo', tab:'Logo', label:'Logo', max:1, desc:'Your logo, shown in the centre of the top bar. Use a PNG with a transparent background. If empty, the site shows the name as text.'},
   {key:'prewedding', tab:'Pre-wedding', label:'Pre-wedding', max:MAX_CAT},
   {key:'engagement', tab:'Engagement', label:'Engagement', max:MAX_CAT},
   {key:'haldi', tab:'Haldi and mehendi', label:'Haldi and mehendi', max:MAX_CAT},
@@ -159,9 +193,9 @@ const IMG_SECTIONS = [
   {key:'candid', tab:'Candid portraits', label:'Candid portraits', max:MAX_CAT},
   {key:'snapshot', tab:'Scrolling strip', label:'Scrolling strip (Frames we love)', max:MAX_SNAP, desc:'The photos that scroll sideways near the bottom of the site. Each one links to your Instagram.'}
 ];
-const TAB_ORDER = ['Hero','About photo','Pre-wedding','Engagement','Haldi and mehendi','Wedding day','Reception','Candid portraits','Video portfolio','Scrolling strip'];
+const TAB_ORDER = ['Hero','Logo','About photo','Pre-wedding','Engagement','Haldi and mehendi','Wedding day','Reception','Candid portraits','Video portfolio','Scrolling strip'];
 
-let data = { heroImages:[], heroVideo:'', aboutPhoto:[], prewedding:[], engagement:[], haldi:[], wedding:[], reception:[], candid:[], snapshot:[], videos:[] };
+let data = { logo:[], heroImages:[], heroVideo:'', heroVideoMobile:'', aboutPhoto:[], prewedding:[], engagement:[], haldi:[], wedding:[], reception:[], candid:[], snapshot:[], videos:[] };
 let dirty=false, busy=false;
 
 const $=s=>document.querySelector(s);
@@ -189,8 +223,8 @@ async function init(){
     if(!r.ok) throw new Error(r.status);
     const rec=(await r.json()).record||{};
     data={...data,...rec};
-    Object.keys(data).forEach(k=>{ if(['heroVideo'].includes(k)) return; if(!Array.isArray(data[k])) data[k]=[]; });
-    if(typeof data.heroVideo!=='string') data.heroVideo='';
+    Object.keys(data).forEach(k=>{ if(['heroVideo','heroVideoMobile'].includes(k)) return; if(!Array.isArray(data[k])) data[k]=[]; });
+    if(typeof data.heroVideo!=='string') data.heroVideo=''; if(typeof data.heroVideoMobile!=='string') data.heroVideoMobile='';
     toast('Site loaded','ok');
   }catch(e){ console.error(e); toast('Could not load. Check the JSONBin key and bin ID.','err'); }
   hideLoad(); render();
@@ -290,25 +324,29 @@ async function uploadImages(sec,files){
   if(ok) toast(ok+' photo'+(ok>1?'s':'')+' added. Press Save to publish.','ok');
 }
 
-/* ═══════════════ HERO VIDEO ═══════════════ */
+/* ═══════════════ HERO VIDEOS ═══════════════ */
+function vslot(key,label,hint){
+  const v=data[key];
+  return '<div class="hv">'+(v?'<video src="'+esc(v)+'" muted loop playsinline controls preload="metadata"></video>':'<div class="e">No video</div>')
+   +'<div><b style="font-family:var(--serif);font-weight:400;font-size:20px">'+label+'</b><p style="color:var(--muted);font-size:14px;margin:4px 0 14px;max-width:26em">'+hint+'</p>'
+   +(v?'<button class="sm del" data-hvdel="'+key+'">Remove video</button>':'<label class="btn">Upload video<input type="file" data-hvin="'+key+'" accept="video/*"></label>')+'</div></div>';
+}
 function heroVideoBox(){
-  return '<div class="note">Optional: add one hero video. When a hero video is saved, it plays instead of the photo slideshow. Remove it to go back to the slideshow. Keep it under 100 MB (Cloudinary free plan limit) and short, 10 to 30 seconds.</div>'
-  +'<div class="hv">'+(data.heroVideo?'<video src="'+esc(data.heroVideo)+'" muted loop playsinline controls preload="metadata"></video>':'<div class="e">No hero video</div>')
-  +'<div><b style="font-family:var(--serif);font-weight:400;font-size:20px">Hero video</b><p style="color:var(--muted);font-size:14px;margin:4px 0 14px">'+(data.heroVideo?'Currently live after save.':'Slideshow is being used.')+'</p>'
-  +(data.heroVideo?'<button class="sm del" id="hvDel">Remove video</button>':'<label class="btn">Upload video<input type="file" id="hvIn" accept="video/*"></label>')+'</div></div>'
-  +'<h2 style="font-size:22px;margin-bottom:10px">Slideshow photos</h2>';
+  return '<div class="note">Optional: add hero videos. When a video is saved it plays behind the buttons instead of the photo slideshow. Add a wide video for computers and a tall one for phones. If you only add one, it is used on both. Remove the videos to go back to the slideshow. Keep each under 100 MB (Cloudinary free plan limit).</div>'
+   +vslot('heroVideo','Computer hero video','Wide (landscape) video for computers and tablets.')
+   +vslot('heroVideoMobile','Phone hero video','Tall (portrait) video for phones.')
+   +'<h2 style="font-size:22px;margin:30px 0 10px">Slideshow photos (shown only when no video is saved)</h2>';
 }
 function bindHeroVideo(){
-  const d=$('#hvDel'), i=$('#hvIn');
-  if(d) d.onclick=()=>{ if(!confirm('Remove the hero video?')) return; data.heroVideo=''; markDirty(); render(); };
-  if(i) i.onchange=async()=>{
-    const f=i.files[0]; if(!f) return;
+  $('#panels').querySelectorAll('[data-hvdel]').forEach(b=>b.onclick=()=>{ if(!confirm('Remove this hero video?')) return; data[b.dataset.hvdel]=''; markDirty(); render(); });
+  $('#panels').querySelectorAll('[data-hvin]').forEach(i=>i.onchange=async()=>{
+    const f=i.files[0], key=i.dataset.hvin; if(!f) return;
     if(!configured()){ toast('Add your JSONBin and Cloudinary details first','err'); return; }
-    showLoad('Uploading hero video'); 
-    try{ data.heroVideo=await upload(f,'video','hero',p=>$('#loadTxt').textContent='Uploading hero video '+p+'%'); markDirty(); toast('Hero video added. Press Save to publish.','ok'); }
+    showLoad('Uploading hero video');
+    try{ data[key]=await upload(f,'video','hero',p=>$('#loadTxt').textContent='Uploading hero video '+p+'%'); markDirty(); toast('Hero video added. Press Save to publish.','ok'); }
     catch(e){ console.error(e); toast('Video upload failed: '+e.message,'err'); }
     hideLoad(); render();
-  };
+  });
 }
 
 /* ═══════════════ VIDEO PORTFOLIO ═══════════════ */
