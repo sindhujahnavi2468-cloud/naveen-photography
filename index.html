@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naveen Photography — Luxury Wedding Photographer</title>
+<meta name="description" content="Luxury wedding photographer. Candid, cinematic, emotional. Capturing love, emotion and legacy.">
+<meta property="og:title" content="Naveen Photography — Luxury Wedding Photographer">
+<meta property="og:description" content="Candid, cinematic, emotional wedding photography.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#160f14; --ink2:#241a20; --ivory:#f4ede3; --paper:#fbf7f1;
+  --wine:#5e1f30; --wine2:#7a2c40; --blush:#d8b4a4; --brass:#b08d57;
+  --line:rgba(22,15,20,.14); --muted:#6f6269;
+  --serif:'Fraunces',Georgia,serif; --sans:'Instrument Sans',system-ui,sans-serif;
+  --pad:clamp(20px,6vw,88px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+[hidden]{display:none!important}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;color:#fff;transition:background .35s,color .35s,box-shadow .35s}
+.nav.solid{background:rgba(251,247,241,.96);color:var(--ink);box-shadow:0 1px 0 var(--line);backdrop-filter:blur(12px)}
+.brand{font-family:var(--serif);font-size:24px;font-weight:400;text-decoration:none;letter-spacing:.01em}
+.brand i{font-weight:300}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{text-decoration:none;font-size:15px;font-weight:500;opacity:.9}
+.nav-links a:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
+.nav-links .nav-cta{background:var(--brass);color:#1b1208;padding:10px 20px;border-radius:999px;opacity:1}
+.nav-links .nav-cta:hover{text-decoration:none;background:#c4a06a}
+.burger{display:none;background:none;border:0;color:inherit;width:44px;height:44px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:currentColor;margin:5px auto;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:820px){
+  .burger{display:block}
+  .nav-links{position:fixed;inset:72px 0 auto 0;background:var(--paper);color:var(--ink);flex-direction:column;align-items:flex-start;gap:0;padding:8px var(--pad) 28px;transform:translateY(-130%);transition:transform .4s;box-shadow:0 20px 40px rgba(0,0,0,.15)}
+  .nav-links.open{transform:none}
+  .nav-links a{padding:16px 0;width:100%;border-bottom:1px solid var(--line);font-size:18px}
+  .nav-links .nav-cta{margin-top:18px;text-align:center;border-bottom:0;padding:14px 20px}
+}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:linear-gradient(160deg,var(--wine) 0%,var(--ink) 70%);color:#fff;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media .slide,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-media .slide{opacity:0;transition:opacity 1.8s ease;background-size:cover;background-position:center}
+.hero-media .slide.on{opacity:1}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(22,15,20,.88) 0%,rgba(22,15,20,.35) 45%,rgba(22,15,20,.25) 100%)}
+.hero-copy{position:relative;padding:0 var(--pad) clamp(48px,9vh,96px);max-width:1200px;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(46px,9.5vw,136px);line-height:.98;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+.hero p{margin-top:26px;font-size:clamp(17px,2vw,21px);max-width:34em;color:rgba(255,255,255,.88)}
+.hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;padding:15px 30px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn-brass{background:var(--brass);color:#1b1208}
+.btn-brass:hover{background:#c4a06a}
+.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-wine{background:var(--wine);color:#fff}
+.btn-wine:hover{background:var(--wine2)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:#fff}
+
+/* SECTION BASICS */
+section{position:relative}
+.wrap{padding:clamp(72px,11vw,150px) var(--pad)}
+.h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5.5vw,76px);line-height:1.04;letter-spacing:-.015em}
+.lede{color:var(--muted);max-width:36em;margin-top:18px;font-size:18px}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:5fr 6fr;gap:clamp(32px,7vw,110px);align-items:center}
+.about-photo{aspect-ratio:4/5;background:linear-gradient(160deg,var(--blush),var(--wine2));border-radius:220px 220px 6px 6px;overflow:hidden}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-text p{margin-top:22px;font-size:18px;color:#3b2f36;max-width:34em}
+.about-text .btn{margin-top:34px}
+@media(max-width:820px){.about{grid-template-columns:1fr}.about-photo{max-width:420px}}
+
+/* WORK */
+.work{background:var(--ivory)}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:38px 0 34px}
+.tab{background:transparent;border:1px solid var(--line);padding:10px 20px;border-radius:999px;font-size:15px;font-weight:500;color:var(--ink);cursor:pointer;transition:.2s}
+.tab:hover{border-color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.masonry{columns:3 280px;column-gap:14px}
+.masonry .m{break-inside:avoid;margin-bottom:14px;background:#e6dccd;overflow:hidden;cursor:zoom-in;position:relative}
+.masonry .m img{width:100%;height:auto;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.masonry .m:hover img{transform:scale(1.04)}
+.empty{border:1px dashed rgba(22,15,20,.25);padding:60px 24px;text-align:center;color:var(--muted)}
+
+/* FILMS */
+.films{background:var(--wine);color:#fff}
+.films .lede{color:rgba(255,255,255,.75)}
+.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-top:48px}
+.film{position:relative;aspect-ratio:16/9;background:var(--ink);overflow:hidden;cursor:pointer;border:0;color:#fff;text-align:left;width:100%}
+.film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:opacity .4s,transform .7s}
+.film:hover img{opacity:1;transform:scale(1.04)}
+.film::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,15,20,.85),transparent 55%)}
+.film .t{position:absolute;left:20px;right:70px;bottom:18px;z-index:2;font-family:var(--serif);font-size:22px;font-weight:300;line-height:1.2}
+.film .p{position:absolute;right:18px;bottom:16px;z-index:2;width:44px;height:44px;border-radius:50%;background:var(--brass);display:grid;place-items:center}
+.film .p svg{width:16px;height:16px;fill:#1b1208;margin-left:3px}
+.film-empty{aspect-ratio:16/9;border:1px dashed rgba(255,255,255,.28);display:grid;place-items:center;color:rgba(255,255,255,.55)}
+
+/* LIVE */
+.live{background:var(--ink);color:#fff}
+.live-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(28px,5vw,72px);align-items:center}
+.live .lede{color:rgba(255,255,255,.7)}
+.live-badge{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:9px 18px;border-radius:999px;font-weight:600;font-size:14px;background:rgba(255,255,255,.1)}
+.live-badge .dot{width:10px;height:10px;border-radius:50%;background:#8a7d84}
+.live-badge.is-live{background:#c0262d}
+.live-badge.is-live .dot{background:#fff;animation:pulse 1.4s infinite}
+.live-badge.is-soon{background:var(--brass);color:#1b1208}
+.live-badge.is-soon .dot{background:#1b1208}
+@keyframes pulse{50%{opacity:.25}}
+.live-links{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.live-screen{aspect-ratio:16/9;background:#0e0a0d;border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden}
+.live-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.live-off{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:rgba(255,255,255,.7)}
+.live-off strong{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:8px}
+@media(max-width:900px){.live-grid{grid-template-columns:1fr}}
+
+/* SNAPSHOT */
+.snap{background:var(--paper);overflow:hidden}
+.snap-head{padding:clamp(72px,11vw,150px) var(--pad) 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.snap-track{display:flex;gap:12px;overflow-x:auto;padding:0 var(--pad) clamp(72px,11vw,150px);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.snap-track::-webkit-scrollbar{display:none}
+.snap-track a{flex:0 0 auto;height:clamp(260px,38vw,420px);aspect-ratio:4/5;background:#e6dccd;overflow:hidden;display:block}
+.snap-track a img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.snap-track a:hover img{transform:scale(1.05)}
+.snap-track .ph{flex:0 0 auto;height:clamp(260px,38vw,420px);aspect-ratio:4/5;border:1px dashed rgba(22,15,20,.25);display:grid;place-items:center;color:var(--muted);font-size:14px}
+
+/* CTA */
+.cta{background:var(--blush);text-align:left}
+.cta .wrap{display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+.cta p{margin-top:14px;max-width:30em;color:#4a3036;font-size:18px}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:5fr 6fr;gap:clamp(32px,7vw,110px);align-items:start}
+.contact-list{margin-top:34px;display:grid;gap:22px}
+.contact-list small{display:block;color:var(--muted);font-size:14px}
+.contact-list a,.contact-list span{font-family:var(--serif);font-size:24px;font-weight:300;text-decoration:none}
+.contact-list a:hover{text-decoration:underline;text-underline-offset:5px}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.f label{font-size:14px;font-weight:500}
+.f input,.f select,.f textarea{width:100%;border:0;border-bottom:1.5px solid rgba(22,15,20,.3);background:transparent;padding:10px 0;font:inherit;font-size:17px;color:var(--ink);border-radius:0;outline:0;transition:border-color .2s}
+.f textarea{min-height:100px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-bottom-color:var(--wine)}
+.note{margin-top:14px;font-size:14px;color:var(--muted)}
+@media(max-width:820px){.contact{grid-template-columns:1fr}form .row{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:56px var(--pad) 36px}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+footer .brand{color:#fff;font-size:28px;display:block;margin-bottom:8px}
+footer nav{display:flex;gap:24px;flex-wrap:wrap}
+footer nav a{text-decoration:none;font-size:15px}
+footer nav a:hover{color:#fff}
+.copy{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:14px}
+
+/* LIGHTBOX + MODAL */
+.lb{position:fixed;inset:0;z-index:500;background:rgba(14,9,12,.96);display:none;align-items:center;justify-content:center}
+.lb.open{display:flex}
+.lb img{max-width:92vw;max-height:88vh;object-fit:contain}
+.lb iframe,.lb video{width:min(92vw,1100px);aspect-ratio:16/9;max-height:86vh;border:0;background:#000}
+.lb button{position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer}
+.lb button:hover{background:var(--brass);color:#1b1208}
+.lb .x{top:22px;right:22px}.lb .pv{left:20px;top:50%}.lb .nx{right:20px;top:50%}
+
+/* QUOTE BUILDER */
+#quote{background:var(--paper);min-height:100vh}
+.q-top{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);height:72px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between}
+.q-top .brand{color:var(--ink)}
+.q-top a.back{font-size:15px;font-weight:500;text-decoration:none}
+.q-top a.back:hover{text-decoration:underline;text-underline-offset:5px}
+.q-layout{display:grid;grid-template-columns:1fr 340px;min-height:calc(100vh - 72px)}
+.q-main{padding:clamp(40px,7vw,90px) var(--pad) 140px;max-width:960px}
+.q-progress{height:3px;background:var(--line);margin-bottom:12px}
+.q-progress i{display:block;height:100%;background:var(--wine);width:0;transition:width .4s}
+.q-count{font-size:14px;color:var(--muted);margin-bottom:40px}
+.q-title{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5vw,60px);line-height:1.05;letter-spacing:-.015em}
+.q-sub{color:var(--muted);margin-top:12px;font-size:18px;max-width:32em}
+.choice-row{display:flex;gap:12px;margin:32px 0 8px}
+.choice{flex:0 0 auto;min-width:130px;padding:14px 26px;border:1.5px solid var(--line);background:#fff;border-radius:999px;font-size:16px;font-weight:600;cursor:pointer;transition:.2s}
+.choice:hover{border-color:var(--ink)}
+.choice.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:30px 0}
+.opt{position:relative;background:#fff;border:1.5px solid var(--line);padding:22px 20px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--ink)}
+.opt.on{border-color:var(--wine);background:#fbeff0}
+.opt .ic{font-size:30px;line-height:1;margin-bottom:8px}
+.opt .nm{font-weight:600;font-size:16px}
+.opt .pr{font-family:var(--serif);font-size:20px;color:var(--wine)}
+.opt .ds{font-size:14px;color:var(--muted)}
+.opt .tick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:var(--wine);color:#fff;font-size:12px;display:none;place-items:center}
+.opt.on .tick{display:grid}
+.qty{display:flex;align-items:center;gap:12px;margin-top:10px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:16px;cursor:pointer}
+.qty button:hover{border-color:var(--wine);color:var(--wine)}
+.qty b{min-width:20px;text-align:center}
+.q-err{color:#b3261e;font-size:15px;min-height:24px;margin-bottom:8px}
+.q-nav{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.q-nav .link{background:none;border:0;font-size:15px;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+.q-side{border-left:1px solid var(--line);background:#fff;padding:clamp(32px,5vw,56px) 30px;position:sticky;top:72px;height:calc(100vh - 72px);overflow-y:auto;display:flex;flex-direction:column}
+.q-side h3{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:18px}
+.q-lines{flex:1}
+.q-line{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.q-line span:last-child{font-weight:600;white-space:nowrap}
+.q-none{color:var(--muted);font-size:15px}
+.q-total{margin-top:22px;padding-top:18px;border-top:2px solid var(--ink)}
+.q-total small{color:var(--muted);font-size:14px}
+.q-total div{font-family:var(--serif);font-size:44px;font-weight:300;color:var(--wine);line-height:1.1}
+.q-mobile{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:12px var(--pad);justify-content:space-between;align-items:center}
+.q-mobile small{color:var(--muted);font-size:13px;display:block}
+.q-mobile b{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--wine)}
+.final-price{font-family:var(--serif);font-weight:300;font-size:clamp(52px,9vw,100px);color:var(--wine);line-height:1;margin:14px 0 36px}
+.sum{width:100%;border-collapse:collapse;margin:10px 0 36px;font-size:16px}
+.sum th{text-align:left;font-weight:500;color:var(--muted);font-size:14px;padding:10px 12px 10px 0;border-bottom:1.5px solid var(--ink)}
+.sum td{padding:12px 12px 12px 0;border-bottom:1px solid var(--line)}
+.sum td:last-child,.sum th:last-child{text-align:right;padding-right:0}
+.sum tfoot td{font-weight:700;color:var(--wine);border-bottom:0}
+.qform{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;max-width:640px}
+@media(max-width:900px){
+  .q-layout{grid-template-columns:1fr}
+  .q-side{display:none}
+  .q-mobile{display:flex}
+  .qform{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ═════════ HOME ═════════ -->
+<div id="home">
+  <header class="nav" id="nav">
+    <a class="brand" href="#top">Naveen <i>Photography</i></a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#films">Films</a>
+      <a href="#live">Live</a>
+      <a href="#contact">Contact</a>
+      <a href="#quote" class="nav-cta">Build your quote</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-media" id="heroMedia"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <h1>Capturing love. Emotion. Legacy.</h1>
+      <p>Luxury wedding photographer. Candid, cinematic and emotional storytelling for your biggest day.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brass" href="#quote">Build your quote</a>
+        <a class="btn btn-ghost" href="#work">See the work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="about-photo" id="aboutPhoto"></div>
+      <div class="about-text">
+        <h2 class="h2">Weddings move fast. The feeling stays.</h2>
+        <p>A glance across the room, a parent wiping a tear, a laugh nobody planned. I photograph these moments as they happen, then shape them into a story you can come back to for decades.</p>
+        <p>Every wedding is shot candidly and cinematically, so the pictures feel like the day did.</p>
+        <a class="btn btn-wine" href="#contact">Talk to Naveen</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="wrap">
+      <div class="work-head">
+        <div>
+          <h2 class="h2">The work</h2>
+          <p class="lede">Pick a chapter. Tap any photo to see it full size.</p>
+        </div>
+      </div>
+      <div class="tabs" id="workTabs" role="tablist"></div>
+      <div class="masonry" id="workGrid"></div>
+    </div>
+  </section>
+
+  <section class="films" id="films">
+    <div class="wrap">
+      <h2 class="h2">Wedding films</h2>
+      <p class="lede">Moving pictures from the days we've been lucky enough to be part of.</p>
+      <div class="film-grid" id="filmGrid"></div>
+    </div>
+  </section>
+
+  <section class="live" id="live">
+    <div class="wrap live-grid">
+      <div>
+        <h2 class="h2">Live from the wedding</h2>
+        <p class="lede">When we go live on YouTube, the broadcast plays right here, at the same moment. Family who couldn't travel can still be in the room.</p>
+        <div class="live-badge" id="liveBadge"><span class="dot"></span><span id="liveBadgeText">Checking for a live broadcast</span></div>
+        <div class="live-links">
+          <a class="btn btn-brass" id="liveWatch" href="https://youtube.com/@naveensolophotography" target="_blank" rel="noopener">Open YouTube channel</a>
+        </div>
+      </div>
+      <div class="live-screen" id="liveScreen">
+        <div class="live-off"><div><strong>Checking the channel</strong>One moment.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snap" id="gallery">
+    <div class="snap-head">
+      <div>
+        <h2 class="h2">Frames we love</h2>
+        <p class="lede">A moving strip of favourites. Swipe, or tap one to see more on Instagram.</p>
+      </div>
+      <a class="btn btn-line" id="igFollow" href="https://www.instagram.com/naveensolo_photography_" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+    <div class="snap-track" id="snapTrack"></div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div>
+        <h2 class="h2">Planning your wedding?</h2>
+        <p>Choose the events you're having and watch your price build up as you go. It takes about two minutes.</p>
+      </div>
+      <a class="btn btn-wine" href="#quote">Build your quote</a>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <h2 class="h2">Tell us about your day</h2>
+        <p class="lede">Share the date and the occasion. We'll message you on WhatsApp.</p>
+        <div class="contact-list">
+          <div><small>Call or WhatsApp</small><a href="tel:+918328408548">8328408548</a></div>
+          <div><small>Instagram</small><a href="https://www.instagram.com/naveensolo_photography_" target="_blank" rel="noopener">@naveensolo_photography_</a></div>
+          <div><small>YouTube</small><a href="https://youtube.com/@naveensolophotography" target="_blank" rel="noopener">@naveensolophotography</a></div>
+        </div>
+      </div>
+      <form id="enqForm" onsubmit="return sendEnquiry(event)">
+        <div class="row">
+          <div class="f"><label for="eName">Your name</label><input id="eName" required></div>
+          <div class="f"><label for="ePhone">Phone number</label><input id="ePhone" type="tel" required></div>
+        </div>
+        <div class="row">
+          <div class="f"><label for="eDate">Date of the occasion</label><input id="eDate" type="date" required></div>
+          <div class="f"><label for="eType">Occasion</label>
+            <select id="eType" required>
+              <option value="" disabled selected>Choose one</option>
+              <option>Wedding</option><option>Engagement</option><option>Pre-wedding shoot</option><option>Haldi</option><option>Mehendi</option><option>Sangeet</option><option>Reception</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="f"><label for="eVenue">Venue or city</label><input id="eVenue"></div>
+        <div class="f"><label for="eMsg">Anything we should know</label><textarea id="eMsg"></textarea></div>
+        <button class="btn btn-wine" type="submit">Send on WhatsApp</button>
+        <p class="note">Opens WhatsApp with your details filled in. Nothing is sent until you press send there.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top">Naveen Photography</a>
+        <div>Candid, cinematic, emotional wedding photography.</div>
+      </div>
+      <nav>
+        <a href="#work">Work</a><a href="#films">Films</a><a href="#live">Live</a><a href="#quote">Build your quote</a><a href="#contact">Contact</a>
+        <a href="https://www.instagram.com/naveensolo_photography_" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/@naveensolophotography" target="_blank" rel="noopener">YouTube</a>
+      </nav>
+    </div>
+    <div class="copy">© <span id="yr"></span> Naveen Photography. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ═════════ QUOTE BUILDER ═════════ -->
+<div id="quote" hidden>
+  <div class="q-top">
+    <a class="brand" href="#top">Naveen <i>Photography</i></a>
+    <a class="back" href="#top">Back to website</a>
+  </div>
+  <div class="q-layout">
+    <main class="q-main">
+      <div class="q-progress"><i id="qBar"></i></div>
+      <div class="q-count" id="qCount"></div>
+      <div id="qStage"></div>
+    </main>
+    <aside class="q-side">
+      <h3>Your quote</h3>
+      <div class="q-lines" id="qLines"></div>
+      <div class="q-total"><small>Estimated total</small><div id="qTotal">₹0</div></div>
+    </aside>
+  </div>
+  <div class="q-mobile"><div><small>Estimated total</small><b id="qTotalM">₹0</b></div></div>
+</div>
+
+<!-- LIGHTBOX / VIDEO MODAL -->
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="x" id="lbX" aria-label="Close">✕</button>
+  <button class="pv" id="lbP" aria-label="Previous">‹</button>
+  <div id="lbBody"></div>
+  <button class="nx" id="lbN" aria-label="Next">›</button>
+</div>
+
+<script>
+/* ═══════════════ CONFIG — edit these ═══════════════ */
+const JSONBIN_KEY = 'PASTE_YOUR_JSONBIN_KEY_HERE';   // same bin as admin.html
+const JSONBIN_ID  = 'PASTE_YOUR_BIN_ID_HERE';
+const YT_API_KEY  = '';                              // YouTube Data API v3 key (needed for live detection)
+const YT_HANDLE   = 'naveensolophotography';
+const YT_CHANNEL  = 'https://youtube.com/@naveensolophotography';
+const PHONE       = '918328408548';
+const INSTAGRAM   = 'https://www.instagram.com/naveensolo_photography_';
+
+const CATS = [
+  ['prewedding','Pre-wedding'],['engagement','Engagement'],['haldi','Haldi and mehendi'],
+  ['wedding','Wedding day'],['reception','Reception'],['candid','Candid portraits']
+];
+
+/* Quote builder pricing — edit prices freely (in rupees) */
+const EVENTS = [
+  {id:'wedding',name:'The big day',mandatory:true,sub:'Your wedding day, the one everything else leads to.',
+   opts:[['Traditional photo',10000],['Traditional video',10000],['Candid photo',20000],['Candid video',20000],['Drone',8000],['Live stream',10000]]},
+  {id:'engagement',name:'Engagement',sub:'Ring, family and first nerves.',
+   opts:[['Traditional photo',10000],['Traditional video',10000],['Candid photo',15000],['Candid video',15000],['Drone',8000],['Live stream',10000]]},
+  {id:'haldi',name:'Haldi',sub:'Turmeric, laughter and colour.',
+   opts:[['Traditional photo',8000],['Traditional video',8000],['Candid photo',12000],['Candid video',15000]]},
+  {id:'mehendi',name:'Mehendi',sub:'Henna, music and cousins.',
+   opts:[['Candid photo',12000],['Traditional video',15000]]},
+  {id:'sangeet',name:'Sangeet',sub:'The night everyone dances.',
+   opts:[['Traditional photo',10000],['Traditional video',10000],['Candid photo',15000],['Candid video',20000]]},
+  {id:'reception',name:'Reception',sub:'Blessings, dinner and the long line for photos.',
+   opts:[['Traditional photo',10000],['Traditional video',10000],['Candid photo',15000],['Candid video',15000],['Drone',8000],['Live stream',10000]]},
+  {id:'prewedding',name:'Pre-wedding shoot',sub:'A shoot just for the two of you.',
+   opts:[['Photo only',20000],['Photo and video',45000]]}
+];
+const ALBUMS = [['Premium album',20000,'25 sheets'],['Heirloom album',30000,'25 sheets, our finest binding']];
+const STYLES = [['Cinematic','A tight highlight film that plays like a trailer.'],['Documentary','A longer film that follows the day in full.']];
+
+/* ═══════════════ HELPERS ═══════════════ */
+const $ = s => document.querySelector(s);
+const cld = (u,t) => (u && u.includes('/upload/')) ? u.replace('/upload/','/upload/'+t+'/') : u;
+const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#yr').textContent = new Date().getFullYear();
+
+/* ═══════════════ ROUTER ═══════════════ */
+function route(){
+  const h = location.hash;
+  const isQ = h === '#quote';
+  $('#home').hidden = isQ;
+  $('#quote').hidden = !isQ;
+  closeMenu();
+  if (isQ){ window.scrollTo(0,0); document.title='Build your quote — Naveen Photography'; qStart(); return; }
+  document.title='Naveen Photography — Luxury Wedding Photographer';
+  const el = h.length>1 ? document.getElementById(h.slice(1)) : null;
+  if (el) setTimeout(()=>el.scrollIntoView(),30); else window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+
+/* ═══════════════ NAV ═══════════════ */
+const nav=$('#nav'), burger=$('#burger'), navLinks=$('#navLinks');
+function onScroll(){ nav.classList.toggle('solid', window.scrollY>60); }
+window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+burger.addEventListener('click',()=>{ burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+function closeMenu(){ burger.classList.remove('open'); navLinks.classList.remove('open'); }
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+
+/* ═══════════════ DATA ═══════════════ */
+let DATA = {};
+async function loadData(){
+  if (JSONBIN_ID.startsWith('PASTE')) { renderAll(); return; }
+  try{
+    const r = await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest',{headers:{'X-Master-Key':JSONBIN_KEY}});
+    if(!r.ok) throw new Error(r.status);
+    DATA = (await r.json()).record || {};
+  }catch(e){ console.warn('Could not load site data',e); }
+  renderAll();
+}
+function renderAll(){ renderHero(); renderAbout(); renderWork(); renderFilms(); renderSnap(); }
+
+/* HERO */
+let heroTimer;
+function renderHero(){
+  const box=$('#heroMedia'); box.innerHTML=''; clearInterval(heroTimer);
+  if (DATA.heroVideo){
+    const v=document.createElement('video');
+    v.src=cld(DATA.heroVideo,'q_auto'); v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline','');
+    box.appendChild(v); v.play().catch(()=>{}); return;
+  }
+  const imgs=(DATA.heroImages||[]).filter(Boolean);
+  if(!imgs.length) return;
+  imgs.forEach((u,i)=>{
+    const d=document.createElement('div'); d.className='slide'+(i===0?' on':'');
+    d.style.backgroundImage='url("'+cld(u,'q_auto,f_auto,w_1920')+'")'; box.appendChild(d);
+  });
+  if(imgs.length>1){
+    let i=0; const slides=box.querySelectorAll('.slide');
+    heroTimer=setInterval(()=>{ slides[i].classList.remove('on'); i=(i+1)%slides.length; slides[i].classList.add('on'); },5500);
+  }
+}
+
+/* ABOUT */
+function renderAbout(){
+  const p=(DATA.aboutPhoto||[])[0];
+  if(p) $('#aboutPhoto').innerHTML='<img src="'+cld(p,'q_auto,f_auto,w_900')+'" alt="Naveen" loading="lazy">';
+}
+
+/* WORK (image portfolio) */
+let curCat = CATS[0][0], lbList=[], lbIdx=0;
+function renderWork(){
+  $('#workTabs').innerHTML = CATS.map(([k,l])=>'<button class="tab'+(k===curCat?' on':'')+'" data-k="'+k+'" role="tab">'+l+'</button>').join('');
+  $('#workTabs').querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{curCat=b.dataset.k;renderWork();}));
+  const imgs=(DATA[curCat]||[]).filter(Boolean);
+  const g=$('#workGrid');
+  if(!imgs.length){ g.style.columns='auto'; g.innerHTML='<div class="empty">Photos for this chapter are on the way.</div>'; return; }
+  g.style.columns='';
+  g.innerHTML = imgs.map((u,i)=>'<div class="m" data-i="'+i+'"><img src="'+cld(u,'q_auto,f_auto,w_700')+'" alt="" loading="lazy"></div>').join('');
+  g.querySelectorAll('.m').forEach(m=>m.addEventListener('click',()=>openLb('img',imgs,+m.dataset.i)));
+}
+
+/* FILMS (video portfolio) */
+let films=[];
+function ytId(v){ return v.id; }
+function filmPoster(v){
+  if(v.type==='yt') return 'https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg';
+  return cld(v.url,'so_1,w_800,h_450,c_fill,f_jpg').replace(/\.[a-z0-9]+(\?.*)?$/i,'.jpg');
+}
+function renderFilms(){
+  films=(DATA.videos||[]).filter(Boolean);
+  const g=$('#filmGrid');
+  if(!films.length){ g.innerHTML=[1,2,3].map(()=>'<div class="film-empty">Film coming soon</div>').join(''); return; }
+  g.innerHTML=films.map((v,i)=>'<button class="film" data-i="'+i+'"><img src="'+filmPoster(v)+'" alt="" loading="lazy"><span class="t">'+esc(v.title||'Wedding film')+'</span><span class="p"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></span></button>').join('');
+  g.querySelectorAll('.film').forEach(b=>b.addEventListener('click',()=>openLb('film',films,+b.dataset.i)));
+}
+
+/* SNAPSHOT (scroll strip) */
+let snapRaf, snapPause=false;
+function renderSnap(){
+  const t=$('#snapTrack'); const imgs=(DATA.snapshot||[]).filter(Boolean);
+  cancelAnimationFrame(snapRaf);
+  if(!imgs.length){ t.innerHTML=Array(6).fill('<div class="ph">Coming soon</div>').join(''); return; }
+  t.innerHTML=imgs.map(u=>'<a href="'+INSTAGRAM+'" target="_blank" rel="noopener" aria-label="View on Instagram"><img src="'+cld(u,'q_auto,f_auto,w_600')+'" alt="" loading="lazy"></a>').join('');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  t.onmouseenter=()=>snapPause=true; t.onmouseleave=()=>snapPause=false;
+  t.ontouchstart=()=>snapPause=true; t.ontouchend=()=>setTimeout(()=>snapPause=false,1800);
+  let pos=0;
+  (function step(){
+    if(!snapPause){
+      if(Math.abs(t.scrollLeft-pos)>3) pos=t.scrollLeft;
+      pos+=0.8; t.scrollLeft=pos;
+      if(t.scrollLeft>=t.scrollWidth-t.clientWidth-2){ pos=0; t.scrollLeft=0; }
+    }
+    snapRaf=requestAnimationFrame(step);
+  })();
+}
+
+/* ═══════════════ LIGHTBOX / FILM MODAL ═══════════════ */
+let lbMode='img';
+function openLb(mode,list,i){ lbMode=mode; lbList=list; lbIdx=i; showLb(); $('#lb').classList.add('open'); document.body.style.overflow='hidden'; }
+function showLb(){
+  const b=$('#lbBody'); const it=lbList[lbIdx];
+  if(lbMode==='img'){ b.innerHTML='<img src="'+cld(it,'q_auto,f_auto,w_1800')+'" alt="">'; }
+  else if(it.type==='yt'){ b.innerHTML='<iframe src="https://www.youtube.com/embed/'+it.id+'?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>'; }
+  else { b.innerHTML='<video src="'+esc(it.url)+'" controls autoplay playsinline></video>'; }
+  const multi=lbList.length>1; $('#lbP').style.display=multi?'':'none'; $('#lbN').style.display=multi?'':'none';
+}
+function closeLb(){ $('#lb').classList.remove('open'); $('#lbBody').innerHTML=''; document.body.style.overflow=''; }
+$('#lbX').onclick=closeLb;
+$('#lbP').onclick=()=>{lbIdx=(lbIdx-1+lbList.length)%lbList.length;showLb();};
+$('#lbN').onclick=()=>{lbIdx=(lbIdx+1)%lbList.length;showLb();};
+$('#lb').addEventListener('click',e=>{ if(e.target.id==='lb') closeLb(); });
+document.addEventListener('keydown',e=>{
+  if(!$('#lb').classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') $('#lbP').click();
+  if(e.key==='ArrowRight') $('#lbN').click();
+});
+
+/* ═══════════════ YOUTUBE LIVE ═══════════════
+   Cost: 2 API units per check (uploads playlist + videos.list). Checks every 90s
+   while the tab is visible. */
+let liveState='', liveVid='';
+async function yt(path){ const r=await fetch('https://www.googleapis.com/youtube/v3/'+path+'&key='+YT_API_KEY); if(!r.ok) throw new Error(r.status); return r.json(); }
+async function uploadsId(){
+  let u=sessionStorage.getItem('np_uploads'); if(u) return u;
+  const d=await yt('channels?part=contentDetails&forHandle=@'+YT_HANDLE);
+  u=d.items[0].contentDetails.relatedPlaylists.uploads; sessionStorage.setItem('np_uploads',u); return u;
+}
+async function checkLive(){
+  if(!YT_API_KEY){ setLive('off'); return; }
+  try{
+    const pl=await uploadsId();
+    const items=(await yt('playlistItems?part=contentDetails&maxResults=8&playlistId='+pl)).items||[];
+    const ids=items.map(i=>i.contentDetails.videoId).join(',');
+    if(!ids){ setLive('off'); return; }
+    const vids=(await yt('videos?part=snippet,liveStreamingDetails&id='+ids)).items||[];
+    const live=vids.find(v=>v.snippet.liveBroadcastContent==='live');
+    if(live){ setLive('live',live); return; }
+    const soon=vids.filter(v=>v.snippet.liveBroadcastContent==='upcoming').sort((a,b)=>new Date(a.liveStreamingDetails.scheduledStartTime)-new Date(b.liveStreamingDetails.scheduledStartTime))[0];
+    setLive(soon?'soon':'off',soon);
+  }catch(e){ console.warn('Live check failed',e); if(!liveState) setLive('off'); }
+}
+function setLive(state,v){
+  const id=v?v.id:'';
+  if(state===liveState && id===liveVid) return;   // nothing changed, don't reload the player
+  liveState=state; liveVid=id;
+  const badge=$('#liveBadge'), txt=$('#liveBadgeText'), screen=$('#liveScreen'), watch=$('#liveWatch');
+  badge.className='live-badge';
+  if(state==='live'){
+    badge.classList.add('is-live'); txt.textContent='Live now';
+    screen.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Live broadcast"></iframe>';
+    watch.href='https://www.youtube.com/watch?v='+id; watch.textContent='Watch on YouTube';
+  } else if(state==='soon'){
+    const when=new Date(v.liveStreamingDetails.scheduledStartTime).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+    badge.classList.add('is-soon'); txt.textContent='Going live '+when;
+    screen.innerHTML='<div class="live-off"><div><strong>'+esc(v.snippet.title)+'</strong>Starts '+when+'. Come back then and it plays here.</div></div>';
+    watch.href='https://www.youtube.com/watch?v='+id; watch.textContent='Set a reminder on YouTube';
+  } else {
+    txt.textContent='Not live right now';
+    screen.innerHTML='<div class="live-off"><div><strong>No live broadcast right now</strong>When we go live on YouTube, it appears here automatically.</div></div>';
+    watch.href=YT_CHANNEL; watch.textContent='Open YouTube channel';
+  }
+}
+checkLive();
+setInterval(()=>{ if(!document.hidden) checkLive(); },90000);
+
+/* ═══════════════ ENQUIRY FORM ═══════════════ */
+function sendEnquiry(e){
+  e.preventDefault();
+  const v=id=>$('#'+id).value.trim();
+  const text='Hi Naveen Photography! Here are my details:\n\nName: '+v('eName')+'\nPhone: '+v('ePhone')+'\nDate: '+v('eDate')+'\nOccasion: '+v('eType')+'\nVenue: '+(v('eVenue')||'Not decided yet')+'\nMessage: '+(v('eMsg')||'None');
+  window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(text),'_blank');
+  return false;
+}
+
+/* ═══════════════ QUOTE BUILDER ═══════════════ */
+const STEPS=[...EVENTS.map(e=>({t:'event',e})),{t:'albums'},{t:'style'}];
+let sel={}, yn={}, style=null, qi=0, qFinal=false;
+const icon=l=>/drone/i.test(l)?'🚁':/live/i.test(l)?'📡':/video|film/i.test(l)?'🎥':/album/i.test(l)?'📖':'📷';
+function qStart(){ if(!$('#qStage').innerHTML) qRender(); }
+function qTotal(){ return Object.values(sel).reduce((s,x)=>s+x.price*x.qty,0); }
+function qSide(){
+  const rows=Object.values(sel);
+  $('#qLines').innerHTML = rows.length ? rows.map(x=>'<div class="q-line"><span>'+esc(x.label)+(x.qty>1?' × '+x.qty:'')+'</span><span>'+inr(x.price*x.qty)+'</span></div>').join('') : '<p class="q-none">Pick a service and it shows up here.</p>';
+  $('#qTotal').textContent=inr(qTotal()); $('#qTotalM').textContent=inr(qTotal());
+}
+function qRender(){
+  const st=$('#qStage'); qSide();
+  $('#qBar').style.width=(qFinal?100:(qi/STEPS.length*100))+'%';
+  if(qFinal){ $('#qCount').textContent='Last step'; return qFinalRender(st); }
+  $('#qCount').textContent='Step '+(qi+1)+' of '+STEPS.length;
+  const s=STEPS[qi]; let h='';
+  if(s.t==='event'){
+    const e=s.e;
+    h+='<h2 class="q-title">'+(e.mandatory?e.name:'Do you have '+(/^[aeiou]/i.test(e.name)?'an ':'a ')+e.name.toLowerCase()+'?')+'</h2><p class="q-sub">'+e.sub+'</p>';
+    if(!e.mandatory) h+=ynRow(e.id);
+    if(e.mandatory||yn[e.id]==='yes'){
+      h+='<div class="opt-grid">'+e.opts.map(([l,p])=>{const k=e.id+':'+l;return '<button class="opt'+(sel[k]?' on':'')+'" data-k="'+esc(k)+'" data-l="'+esc(e.name+' · '+l)+'" data-p="'+p+'"><span class="tick">✓</span><span class="ic">'+icon(l)+'</span><span class="nm">'+l+'</span><span class="pr">'+inr(p)+'</span></button>';}).join('')+'</div>';
+    }
+  } else if(s.t==='albums'){
+    h+='<h2 class="q-title">Would you like albums?</h2><p class="q-sub">Printed keepsakes for you and your families.</p>'+ynRow('albums');
+    if(yn.albums==='yes') h+='<div class="opt-grid">'+ALBUMS.map(([l,p,d])=>{const k='album:'+l;const x=sel[k];return '<div class="opt'+(x?' on':'')+'" data-k="'+esc(k)+'" data-l="'+esc(l)+'" data-p="'+p+'" data-album="1" tabindex="0" role="button"><span class="tick">✓</span><span class="ic">📖</span><span class="nm">'+l+'</span><span class="ds">'+d+'</span><span class="pr">'+inr(p)+'</span><div class="qty"><button data-q="-1">−</button><b>'+(x?x.qty:1)+'</b><button data-q="1">+</button></div></div>';}).join('')+'</div>';
+  } else {
+    h+='<h2 class="q-title">Which film style do you prefer?</h2><p class="q-sub">Included in your quote at no extra cost.</p><div class="opt-grid">'+STYLES.map(([l,d])=>'<button class="opt'+(style===l?' on':'')+'" data-style="'+l+'"><span class="tick">✓</span><span class="ic">🎞️</span><span class="nm">'+l+'</span><span class="ds">'+d+'</span></button>').join('')+'</div>';
+  }
+  h+='<div class="q-err" id="qErr"></div><div class="q-nav"><button class="btn btn-wine" id="qNext">'+(qi===STEPS.length-1?'See my quote':'Next')+'</button>'+(qi>0?'<button class="link" id="qBack">Previous step</button>':'')+'</div>';
+  st.innerHTML=h;
+}
+function ynRow(id){ return '<div class="choice-row"><button class="choice'+(yn[id]==='yes'?' on':'')+'" data-yn="'+id+'" data-v="yes">Yes</button><button class="choice'+(yn[id]==='no'?' on':'')+'" data-yn="'+id+'" data-v="no">No</button></div>'; }
+function clearEvent(id){ Object.keys(sel).forEach(k=>{ if(k.startsWith(id+':')||(id==='albums'&&k.startsWith('album:'))) delete sel[k]; }); }
+function qValid(){
+  const s=STEPS[qi];
+  if(s.t==='event'){
+    const e=s.e;
+    if(!e.mandatory){ if(!yn[e.id]) return 'Choose yes or no to continue.'; if(yn[e.id]==='no') return ''; }
+    if(!e.opts.some(([l])=>sel[e.id+':'+l])) return 'Pick at least one service.';
+  } else if(s.t==='albums'){
+    if(!yn.albums) return 'Choose yes or no to continue.';
+    if(yn.albums==='yes'&&!Object.keys(sel).some(k=>k.startsWith('album:'))) return 'Pick at least one album.';
+  } else if(!style) return 'Pick a film style.';
+  return '';
+}
+$('#qStage').addEventListener('click',e=>{
+  const t=e.target;
+  const q=t.closest('[data-q]');
+  if(q){ e.stopPropagation(); const card=q.closest('.opt'); const k=card.dataset.k; const d=+q.dataset.q;
+    if(!sel[k]){ sel[k]={label:card.dataset.l,price:+card.dataset.p,qty:1}; }
+    else { sel[k].qty+=d; if(sel[k].qty<1) delete sel[k]; }
+    return qRender(); }
+  const c=t.closest('.choice'); if(c){ yn[c.dataset.yn]=c.dataset.v; if(c.dataset.v==='no') clearEvent(c.dataset.yn); return qRender(); }
+  const o=t.closest('.opt');
+  if(o){
+    if(o.dataset.style){ style=o.dataset.style; return qRender(); }
+    const k=o.dataset.k;
+    if(sel[k]) delete sel[k]; else sel[k]={label:o.dataset.l,price:+o.dataset.p,qty:1};
+    return qRender();
+  }
+  if(t.id==='qNext'||t.closest('#qNext')){
+    const err=qValid(); if(err){ $('#qErr').textContent=err; return; }
+    if(qi===STEPS.length-1){ qFinal=true; } else qi++;
+    qRender(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+  if(t.id==='qBack'){ qi--; qRender(); window.scrollTo({top:0,behavior:'smooth'}); }
+});
+function qFinalRender(st){
+  const rows=Object.values(sel);
+  st.innerHTML='<h2 class="q-title">Your estimated investment</h2><div class="final-price">'+inr(qTotal())+'</div>'
+  +'<div class="qform"><div class="f"><label for="qN">Your name</label><input id="qN"></div><div class="f"><label for="qD">Wedding date</label><input id="qD" type="date"></div><div class="f"><label for="qV">Venue</label><input id="qV"></div><div class="f"><label for="qP">Phone number</label><input id="qP" type="tel"></div></div>'
+  +'<table class="sum"><thead><tr><th>Service</th><th>Qty</th><th>Price</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+esc(x.label)+'</td><td>'+x.qty+'</td><td>'+inr(x.price*x.qty)+'</td></tr>').join('')+'</tbody><tfoot><tr><td colspan="2">Estimated total</td><td>'+inr(qTotal())+'</td></tr></tfoot></table>'
+  +'<p class="q-sub" style="margin-bottom:18px">Film style: '+esc(style)+'</p><div class="q-err" id="qErr"></div>'
+  +'<div class="q-nav"><button class="btn btn-wine" id="qSend">Send quote on WhatsApp</button><button class="link" id="qBackF">Previous step</button></div>';
+  $('#qBackF').onclick=()=>{ qFinal=false; qRender(); };
+  $('#qSend').onclick=()=>{
+    const v=id=>$('#'+id).value.trim(); const n=v('qN'),d=v('qD'),ve=v('qV'),p=v('qP');
+    if(!n||!d||!ve||!p){ $('#qErr').textContent='Please fill in your name, date, venue and phone number.'; return; }
+    const lines=rows.map(x=>'• '+x.label+(x.qty>1?' × '+x.qty:'')+' — '+inr(x.price*x.qty)).join('\n');
+    const msg='*New quote request — Naveen Photography*\n\nName: '+n+'\nPhone: '+p+'\nWedding date: '+d+'\nVenue: '+ve+'\nFilm style: '+style+'\n\n*Selected services*\n'+lines+'\n\n*Estimated total: '+inr(qTotal())+'*';
+    window.open('https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg),'_blank');
+  };
+}
+
+/* ═══════════════ GO ═══════════════ */
+loadData();
+route();
+</script>
+</body>
+</html>
