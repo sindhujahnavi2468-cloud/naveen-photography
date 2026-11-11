@@ -1035,12 +1035,7 @@ function sendEnquiry(e){
 /* ═══════════════ QUOTE BUILDER ═══════════════ */
 const OE_EVENT={id:'oe',name:'Other Events',mandatory:true,sub:'Pick what you need for your event.',
  opts:[['Traditional Photo',10000],['Traditional Video',10000],['Candid Photo',20000],['Candid Video',20000],['Drone',8000],['Live Stream',10000],['Premium Book',20000]]};
-/* name, price, old price, tag, inclusions — edit freely */
-const PKGS=[
- ['Prime Package',150000,175000,'Popular Choice',['Wedding: traditional and candid, photo and video','Teaser and full-length film','2 premium albums']],
- ['Premier Package',280000,360000,'Top Requested',['Engagement, haldi and wedding coverage','Traditional and candid, photo and video','Teasers, full-length film, 4 premium albums']],
- ['Elite Package',380000,460000,'Ultimate Legacy',['Every event, including reception and drone','Complimentary pre-wedding shoot','Teasers, full-length film, 4 premium albums']]
-];
+
 const HS_EVENTS=[
  {id:'hs_pre',name:'Half Saree & Dhoti Pre Shoot',mandatory:false,sub:'A shoot just before the ceremony.',
   opts:[['Photo Only',15000],['Photo & Video',30000]]},
@@ -1059,7 +1054,6 @@ const WED_STEPS=[...EVENTS.map(e=>({t:'event',e})),{t:'albums'},{t:'style'}];
 let sel={}, yn={}, style=null, qi=-1, qFinal=false, mode='wedding', pathPicked=false, det={}, STEPS=[], oeType=null;
 function buildSteps(){
   const head=[{t:'details'}];
-  if(mode==='pkg') return [...head,{t:'pkg'}];
   if(mode==='oe'){
     const base=[...head,{t:'path'},{t:'oetype'}];
     if(oeType==='hs') return [...base,...HS_EVENTS.map(e=>({t:'event',e})),{t:'albums'}];
@@ -1091,7 +1085,7 @@ function qRender(){
   const st=$('#qStage'); qSide(); qDots();
   $('#qMob').style.display=(qi>=0&&window.innerWidth<=900)?'flex':'none';
   if(qi<0){
-    st.innerHTML='<section class="q-intro"><p class="q-lab">Build Your Quote</p><h1 class="q-h">How much to capture your wedding?</h1><p class="q-s">Tell us about your celebration — add the events you\'re having and watch your personalised price update live. Only select what applies to you!</p><div class="intro-btns"><button class="q-next" id="qStart"><span>✦ Build Your Quote</span></button><button class="q-next alt" id="qPkg"><span>✦ Signature Packages</span></button></div></section>';
+    st.innerHTML='<section class="q-intro"><p class="q-lab">Build Your Quote</p><h1 class="q-h">How much to capture your wedding?</h1><p class="q-s">Tell us about your celebration — add the events you\'re having and watch your personalised price update live. Only select what applies to you!</p><button class="q-next" id="qStart"><span>✦ Build Your Quote</span></button></section>';
     return;
   }
   if(qFinal) return qFinalRender(st);
@@ -1105,8 +1099,6 @@ function qRender(){
   } else if(s.t==='oetype'){
     const oc=(v,l,ic)=>'<div class="card'+(oeType===v?' sel':'')+'" data-oet="'+v+'"><div class="c-ic">'+ic+'</div><span class="c-lb">'+l+'</span></div>';
     h+='<span class="q-lab">Other Events</span><h2 class="q-h">Which event is it?</h2><p class="q-s">Pick one to continue.</p><div class="cgrid">'+oc('hs','Half Saree &amp; Dhoti Ceremony','👗')+oc('bd','Birthday','🎂')+oc('gen','Something else','📷')+'</div>';
-  } else if(s.t==='pkg'){
-    h+='<span class="q-lab">Signature Packages</span><h2 class="q-h">Pick Your Package</h2><p class="q-s">Choose one of our ready-made packages.</p><div class="pkg-grid">'+PKGS.map(([n,p,old,tag,list],i)=>'<div class="pkg-card'+(sel['pkg:'+i]?' sel':'')+'" data-pkg="'+i+'"><div class="pkg-name">'+n+'</div><span class="pkg-old">'+inr(old)+'</span><span class="pkg-off">'+Math.round((1-p/old)*100)+'% OFF</span><div class="pkg-price">'+inr(p)+'</div><div class="pkg-tag">'+tag+'</div><ul class="pkg-list">'+list.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>').join('')+'</div>';
   } else if(s.t==='event'){
     const e=s.e;
     h+='<span class="q-lab">'+(e.mandatory?'Mandatory':'Optional')+'</span><h2 class="q-h">'+(e.mandatory?e.name:'Do You Have '+(/^[aeiou]/i.test(e.name)?'an ':'a ')+e.name+'?')+'</h2><p class="q-s">'+e.sub+'</p>';
@@ -1130,8 +1122,7 @@ function qValid(){
    if(!pathPicked) return 'Please pick one.';
   } else if(s.t==='oetype'){
     if(!oeType) return 'Please pick one.';
-  } else if(s.t==='pkg'){
-    if(!Object.keys(sel).some(k=>k.startsWith('pkg:'))) return 'Please select a package.';
+
   } else if(s.t==='event'){
     const e=s.e;
     if(!e.mandatory){if(!yn[e.id])return 'Please choose yes or no.';if(yn[e.id]==='no')return '';}
@@ -1145,8 +1136,8 @@ function qValid(){
 $('#qStage').addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.d;if(k)det[k]=e.target.value;});
 $('#qStage').addEventListener('click',e=>{
   const t=e.target, go=()=>{qRender();window.scrollTo({top:0,behavior:'smooth'});};
-  if(t.closest('#qStart')||t.closest('#qPkg')){
-    mode=t.closest('#qPkg')?'pkg':'wedding'; sel={}; yn={}; style=null; pathPicked=false; oeType=null; qFinal=false; STEPS=buildSteps(); qi=0; return go();
+ if(t.closest('#qStart')){
+    mode='wedding'; sel={}; yn={}; style=null; pathPicked=false; oeType=null; qFinal=false; STEPS=buildSteps(); qi=0; return go();
   }
   const pa=t.closest('[data-path]');
   if(pa){
@@ -1156,12 +1147,6 @@ $('#qStage').addEventListener('click',e=>{
  const ot=t.closest('[data-oet]');
   if(ot){
     if(oeType!==ot.dataset.oet){oeType=ot.dataset.oet;sel={};yn={};STEPS=buildSteps();}
-    return qRender();
-  }
-  const pk=t.closest('[data-pkg]');
-  if(pk){
-    Object.keys(sel).forEach(k=>{if(k.startsWith('pkg:'))delete sel[k];});
-    const i=+pk.dataset.pkg; sel['pkg:'+i]={label:'Signature Package · '+PKGS[i][0],price:PKGS[i][1],qty:1};
     return qRender();
   }
   const q=t.closest('[data-q]');
