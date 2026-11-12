@@ -789,6 +789,14 @@ const EVENTS = [
    opts:[['Traditional Photo',10000],['Traditional Video',10000],['Candid Photo',20000],['Candid Video',20000],['Drone',8000],['Live Stream',10000]]},
   {id:'engagement',name:'Engagement',sub:'Ring, family and first nerves.',
    opts:[['Traditional Photo',10000],['Traditional Video',10000],['Candid Photo',15000],['Candid Video',15000],['Drone',8000],['Live Stream',10000]]},
+  {id:'pellikoduku',name:'Pellikoduku',sub:'The ceremony on the groom side.',
+   opts:[['Traditional Photo',10000],['Traditional Video',10000],['Candid Photo',15000],['Candid Video',15000]]},
+  {id:'groom_haldi',name:'Groom Haldi',needs:'pellikoduku',sub:'Turmeric, laughter and colour for the groom.',
+   opts:[['Traditional Photo',8000],['Traditional Video',8000],['Candid Photo',12000],['Candid Video',15000]]},
+  {id:'pellikooturu',name:'Pellikooturu',sub:'The ceremony on the bride side.',
+   opts:[['Traditional Photo',10000],['Traditional Video',10000],['Candid Photo',15000],['Candid Video',15000]]},
+  {id:'bride_haldi',name:'Bride Haldi',needs:'pellikooturu',sub:'Turmeric, laughter and colour for the bride.',
+   opts:[['Traditional Photo',8000],['Traditional Video',8000],['Candid Photo',12000],['Candid Video',15000]]},
   {id:'haldi',name:'Haldi',sub:'Turmeric, laughter and colour.',
    opts:[['Traditional Photo',8000],['Traditional Video',8000],['Candid Photo',12000],['Candid Video',15000]]},
   {id:'mehendi',name:'Mehendi',sub:'Henna, music and cousins.',
@@ -1061,7 +1069,7 @@ function buildSteps(){
     if(oeType==='gen') return [...base,{t:'event',e:OE_EVENT}];
     return base;
   }
-  return [...head,{t:'path'},...WED_STEPS];
+  return [...head,{t:'path'},...WED_STEPS.filter(x=>!x.e||!x.e.needs||yn[x.e.needs]==='yes')];
 }
 const icon=l=>/drone/i.test(l)?'🚁':/live/i.test(l)?'📡':/video|film/i.test(l)?'🎥':/album|book/i.test(l)?'📖':'📷';
 function qInit(){qRender();}
@@ -1154,7 +1162,12 @@ $('#qStage').addEventListener('click',e=>{
     if(!sel[k]) sel[k]={label:card.dataset.l,price:+card.dataset.p,qty:1};
     else{sel[k].qty+=d;if(sel[k].qty<1)delete sel[k];}
     return qRender();}
-  const y=t.closest('[data-yn]'); if(y){yn[y.dataset.yn]=y.dataset.v;if(y.dataset.v==='no')clearEvent(y.dataset.yn);return qRender();}
+  const y=t.closest('[data-yn]'); if(y){
+    yn[y.dataset.yn]=y.dataset.v;
+    if(y.dataset.v==='no'){clearEvent(y.dataset.yn);EVENTS.filter(x=>x.needs===y.dataset.yn).forEach(x=>{clearEvent(x.id);delete yn[x.id];});}
+    STEPS=buildSteps();
+    return qRender();
+  }
   const c=t.closest('.card');
   if(c){
     if(c.dataset.style){style=c.dataset.style;return qRender();}
