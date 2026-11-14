@@ -810,7 +810,7 @@ const EVENTS = [
    opts:[['Photo Only',20000],['Photo & Video',45000]]}
 ];
 const ALBUMS = [['Premium Album',20000,'25 sheets in each book'],['Heirloom Album',30000,'25 sheets, our finest binding']];
-const STYLES = [['Cinematic','A tight highlight film that plays like a trailer.'],['Documentary','A longer film that follows the day in full.']];
+const STYLES = [['Cinematic','A tight highlight film that plays like a trailer.','https://res.cloudinary.com/dho1zs3su/image/upload/v1791194894/Cinematic_eztsyh.png'],['Documentary','A longer film that follows the day in full.','https://res.cloudinary.com/dho1zs3su/image/upload/v1791194892/documentary_ldh1he.png']];
 
 /* ═══════════════ HELPERS ═══════════════ */
 const $=s=>document.querySelector(s);
@@ -1117,7 +1117,7 @@ function qRender(){
     h+='<span class="q-lab">Optional</span><h2 class="q-h">Would You Like Albums?</h2><p class="q-s">Timeless keepsakes for you and your family.</p>'+ynRow('albums');
     if(yn.albums==='yes') h+='<div class="cgrid two">'+ALBUMS.map(([l,p,d])=>{const k='album:'+l,x=sel[k];return '<div class="card'+(x?' sel':'')+'" data-k="'+esc(k)+'" data-l="'+esc(l)+'" data-p="'+p+'"><div class="c-ic">📖</div><span class="c-lb">'+l+'</span><span class="c-ds">'+d+'</span><span class="c-pr">'+inr(p)+'</span><div class="ctr"><button data-q="-1">−</button><b>'+(x?x.qty:1)+'</b><button data-q="1">+</button></div></div>';}).join('')+'</div>';
   } else {
-    h+='<span class="q-lab">Mandatory</span><h2 class="q-h">Which Shooting Style Do You Prefer?</h2><p class="q-s">Included in your quote at no extra cost.</p><div class="cgrid two">'+STYLES.map(([l,d])=>'<div class="card'+(style===l?' sel':'')+'" data-style="'+l+'"><div class="c-ic">🎞️</div><span class="c-lb">'+l+'</span><span class="c-ds">'+d+'</span></div>').join('')+'</div>';
+    h+='<span class="q-lab">Mandatory</span><h2 class="q-h">Which Shooting Style Do You Prefer?</h2><p class="q-s">Included in your quote at no extra cost.</p><div class="cgrid two">'+STYLES.map(([l,d,im])=>'<div class="card'+(style===l?' sel':'')+'" data-style="'+l+'"><div class="c-ic"><img src="'+im+'" alt=""></div><span class="c-lb">'+l+'</span><span class="c-ds">'+d+'</span></div>').join('')+'</div>';
   }
   h+='<div class="q-val" id="qErr"></div><div class="q-nav"><button class="q-next" id="qNext"><span>'+(qi===STEPS.length-1?'See My Quote →':'Next →')+'</span></button><button class="q-prev" id="qBack">'+(qi>0?'Previous step':'Back to intro')+'</button></div></section>';
   st.innerHTML=h;
