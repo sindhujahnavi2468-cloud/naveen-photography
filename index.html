@@ -399,6 +399,7 @@ footer.ft-main::before{content:'';position:absolute;inset:0;pointer-events:none;
 .card.sel::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--qgold);color:#fff;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:600}
 .c-ic{width:72px;height:72px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;filter:grayscale(.25);transition:.28s}
 .card:hover .c-ic{transform:scale(1.07)}
+.c-ic img{width:100%;height:100%;object-fit:contain}
 .c-lb{font-size:.85rem;font-weight:500;color:var(--tp);letter-spacing:.04em;text-transform:uppercase}
 .c-ds{font-family:var(--fe);font-style:italic;font-size:.9rem;color:var(--ts);margin-top:-6px}
 .c-pr{font-family:var(--fe);font-size:.98rem;color:var(--qgold-d);font-weight:600;margin-top:-4px}
@@ -1087,7 +1088,7 @@ function qDots(){
 }
 function ynRow(id){
   const c=(v,l,ic)=>'<div class="card yn-card'+(yn[id]===v?' sel':'')+'" data-yn="'+id+'" data-v="'+v+'"><div class="c-ic">'+ic+'</div><span class="c-lb">'+l+'</span></div>';
-  return '<div class="cgrid yn">'+c('yes','Yes!','💍')+c('no','No','✕')+'</div>';
+  return '<div class="cgrid yn">'+c('yes','Yes!','<img src="https://res.cloudinary.com/dho1zs3su/image/upload/v1791194895/yes_jyqgbo.png" alt="">')+c('no','No','<img src="https://res.cloudinary.com/dho1zs3su/image/upload/v1791194894/no_x35obe.png" alt="">')+'</div>';
 }
 function qRender(){
   const st=$('#qStage'); qSide(); qDots();
