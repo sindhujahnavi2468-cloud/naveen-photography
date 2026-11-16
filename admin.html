@@ -142,7 +142,7 @@ button{font-family:inherit}
 
 <div id="login">
   <div class="lbox">
-    <h1>Naveen Photography</h1>
+    <div class="lbox-logo" id="loginLogo"><span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span></div>
     <p>Admin sign-in</p>
     <label for="pw">Password</label>
     <input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
@@ -153,7 +153,7 @@ button{font-family:inherit}
 
 <div id="app" hidden>
   <div class="top">
-    <span class="logo">Naveen Photography · Admin</span>
+    <span class="logo" id="adminLogo"><span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span></span>
     <div class="r"><span id="saved">Not saved yet this session</span><button onclick="logout()">Sign out</button></div>
   </div>
   <div class="body">
@@ -179,11 +179,11 @@ const JSONBIN_KEY   = '$2a$10$RjxthPmRs1dCJ7wC0eU1E.f8PvFhge/GSX0ls9nLNsCy0ABBHm
 const JSONBIN_ID    = '6aca009cac6210605a24e0de';
 const ADMIN_PASSWORD= 'naveenphotography2026';
 
-const MAX_CAT=12, MAX_HERO=6, MAX_SNAP=24, MAX_VIDEOS=8;
+const MAX_CAT=12, MAX_HERO=10, MAX_SNAP=24, MAX_VIDEOS=8;
 
 /* Every spot on the website that shows a photo or video */
 const IMG_SECTIONS = [
-  {key:'heroImages', tab:'Hero', label:'Hero slideshow', max:MAX_HERO, desc:'Big photos behind the headline at the top of the site. They fade from one to the next. Use wide, high-quality landscape photos.'},
+  {key:'heroImages', tab:'Hero', label:'Hero carousel', max:MAX_HERO, desc:'The photos in the swipeable carousel at the top of the site. The centre photo is large and the side photos tilt back. Use tall (portrait) photos, 4:5 works best. Add at least 4.'},
   {key:'aboutPhoto', tab:'About photo', label:'About photo', max:1, desc:'The portrait shown beside the About text. A vertical photo works best.'},
   {key:'logo', tab:'Logo', label:'Logo', max:1, desc:'Your logo, shown in the centre of the top bar. Use a PNG with a transparent background. If empty, the site shows the name as text.'},
   {key:'prewedding', tab:'Pre-wedding', label:'Pre-wedding', max:MAX_CAT},
@@ -202,6 +202,12 @@ let dirty=false, busy=false;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cld=(u,t)=>(u&&u.includes('/upload/'))?u.replace('/upload/','/upload/'+t+'/'):u;
+function setLogo(){
+  const l=(data.logo||[])[0];
+  const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography"><span class="lg-sub">Luxury Wedding Photographer</span>':'<span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span>';
+  $('#adminLogo').innerHTML=html; $('#loginLogo').innerHTML=html;
+}
+(async()=>{try{const r=await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest',{headers:{'X-Master-Key':JSONBIN_KEY}});const rec=(await r.json()).record||{};data.logo=rec.logo||[];setLogo();}catch(e){}})();
 
 /* ═══════════════ AUTH ═══════════════ */
 function login(){
@@ -271,7 +277,6 @@ function render(){
   const sec=IMG_SECTIONS.find(s=>s.tab===curTab);
   let h='<div class="panel on"><h2>'+sec.label+'</h2>';
   if(sec.desc) h+='<p class="desc">'+sec.desc+'</p>';
-  if(sec.key==='heroImages') h+=heroVideoBox();
   h+=imgManager(sec)+'</div>';
   p.innerHTML=h;
   bindImgManager(sec);
@@ -280,7 +285,7 @@ function render(){
 function stats(){
   const portfolio=['prewedding','engagement','haldi','wedding','reception','candid'].reduce((s,k)=>s+(data[k]||[]).length,0);
   $('#stats').innerHTML=[
-    [(data.heroImages||[]).length+(data.heroVideo?' + video':''),'Hero media'],
+    [(data.heroImages||[]).length,'Hero photos'],
     [portfolio,'Portfolio photos'],[(data.videos||[]).length,'Films'],[(data.snapshot||[]).length,'Strip photos']
   ].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+l+'</span></div>').join('');
 }
