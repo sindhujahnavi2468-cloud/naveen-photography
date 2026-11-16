@@ -87,8 +87,9 @@ nav.top{position:fixed;top:0;left:0;right:0;z-index:500;height:80px;padding:0 32
 /* HERO COVERFLOW */
 .hero2{background:#0c0a06;padding:110px 0 56px;overflow:hidden;text-align:center}
 .heroSwiper{width:100%;padding-bottom:44px}
-.heroSwiper .swiper-slide{width:min(72vw,420px)}
-.heroSwiper img,.hs-ph{width:100%;height:min(66vh,580px);object-fit:cover;display:block}
+.heroSwiper .swiper-slide{width:auto}
+.heroSwiper img{height:min(66vh,580px);width:auto;max-width:86vw;display:block}
+.hs-ph{width:min(72vw,420px);height:min(66vh,580px);display:block}
 .hs-ph{background:var(--ap) center/40% no-repeat,radial-gradient(ellipse at 50% 30%,#3d5f2a,#1e1b14 80%)}
 .heroSwiper .swiper-pagination-bullet{background:#fff;opacity:.45}
 .heroSwiper .swiper-pagination-bullet-active{background:var(--gold);opacity:1}
@@ -880,7 +881,7 @@ function renderLogo(){
 
 /* HERO */
 let heroSwiper;
-function renderHero(){
+async function renderHero(){
   const imgs=(DATA.heroImages||[]).filter(Boolean), box=$('#heroSlides');
   if(!imgs.length){
     box.innerHTML=Array(7).fill('<div class="swiper-slide"><div class="hs-ph"></div></div>').join('');
@@ -888,6 +889,7 @@ function renderHero(){
     let list=imgs.slice(); while(list.length<7) list=list.concat(imgs);
     box.innerHTML=list.map(u=>'<div class="swiper-slide"><img src="'+esc(cld(u,'q_auto,f_auto,w_1000'))+'" alt=""></div>').join('');
   }
+  await Promise.all([...box.querySelectorAll('img')].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r;})));
   if(heroSwiper) heroSwiper.destroy(true,true);
   heroSwiper=new Swiper('.heroSwiper',{
     pagination:{el:'.heroSwiper .swiper-pagination'},
