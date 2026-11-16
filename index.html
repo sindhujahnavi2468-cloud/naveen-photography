@@ -1112,7 +1112,7 @@ function qRender(){
     const e=s.e;
     h+='<span class="q-lab">'+(e.mandatory?'Mandatory':'Optional')+'</span><h2 class="q-h">'+(e.mandatory?e.name:'Do You Have '+(/^[aeiou]/i.test(e.name)?'an ':'a ')+e.name+'?')+'</h2><p class="q-s">'+e.sub+'</p>';
     if(!e.mandatory) h+=ynRow(e.id);
-    if(e.mandatory||yn[e.id]==='yes') h+='<div class="cgrid">'+e.opts.map(([l,p])=>{const k=e.id+':'+l;return '<div class="card'+(sel[k]?' sel':'')+'" data-k="'+esc(k)+'" data-l="'+esc(e.name+' · '+l)+'" data-p="'+p+'"><div class="c-ic">'+(e.id==='engagement'?'💍':icon(l))+'</div><span class="c-lb">'+l+'</span><span class="c-pr">'+inr(p)+'</span></div>';}).join('')+'</div>';
+    if(e.mandatory||yn[e.id]==='yes') h+='<div class="cgrid">'+e.opts.map(([l,p])=>{const k=e.id+':'+l;return '<div class="card'+(sel[k]?' sel':'')+'" data-k="'+esc(k)+'" data-l="'+esc(e.name+' · '+l)+'" data-p="'+p+'"><div class="c-ic">'+icon(l)+'</div><span class="c-lb">'+l+'</span><span class="c-pr">'+inr(p)+'</span></div>';}).join('')+'</div>';
   } else if(s.t==='albums'){
     h+='<span class="q-lab">Optional</span><h2 class="q-h">Would You Like Albums?</h2><p class="q-s">Timeless keepsakes for you and your family.</p>'+ynRow('albums');
     if(yn.albums==='yes') h+='<div class="cgrid two">'+ALBUMS.map(([l,p,d])=>{const k='album:'+l,x=sel[k];return '<div class="card'+(x?' sel':'')+'" data-k="'+esc(k)+'" data-l="'+esc(l)+'" data-p="'+p+'"><div class="c-ic">📖</div><span class="c-lb">'+l+'</span><span class="c-ds">'+d+'</span><span class="c-pr">'+inr(p)+'</span><div class="ctr"><button data-q="-1">−</button><b>'+(x?x.qty:1)+'</b><button data-q="1">+</button></div></div>';}).join('')+'</div>';
