@@ -190,11 +190,11 @@ const JSONBIN_ID    = '6aca009cac6210605a24e0de';
 const ADMIN_PASSWORD= 'naveenphotography2026';
 const LOGO_URL = 'https://res.cloudinary.com/ycleboim/image/upload/v1794374670/naveen-photography/logo/zqpmtwfmp0kxnknll5wg.png';  
 
-const MAX_CAT=12, MAX_HERO=10, MAX_SNAP=24, MAX_VIDEOS=8;
+const MAX_CAT=12, MAX_HERO=6, MAX_SNAP=24, MAX_VIDEOS=8;
 
 /* Every spot on the website that shows a photo or video */
 const IMG_SECTIONS = [
-  {key:'heroImages', tab:'Hero', label:'Hero carousel', max:MAX_HERO, desc:'The photos in the swipeable carousel at the top of the site. The centre photo is large and the side photos tilt back. Use tall (portrait) photos, 4:5 works best. Add at least 4.'},
+  {key:'heroImages', tab:'Hero', label:'Hero slideshow', max:MAX_HERO, desc:'Big photos behind the headline at the top of the site. They fade from one to the next. Use wide, high-quality landscape photos.'},
   {key:'aboutPhoto', tab:'About photo', label:'About photo', max:1, desc:'The portrait shown beside the About text. A vertical photo works best.'},
   {key:'logo', tab:'Logo', label:'Logo', max:1, desc:'Your logo, shown in the centre of the top bar. Use a PNG with a transparent background. If empty, the site shows the name as text.'},
   {key:'prewedding', tab:'Pre-wedding', label:'Pre-wedding', max:MAX_CAT},
@@ -288,15 +288,17 @@ function render(){
   const sec=IMG_SECTIONS.find(s=>s.tab===curTab);
   let h='<div class="panel on"><h2>'+sec.label+'</h2>';
   if(sec.desc) h+='<p class="desc">'+sec.desc+'</p>';
+    if(sec.key==='heroImages') h+=heroVideoBox();
   h+=imgManager(sec)+'</div>';
   p.innerHTML=h;
-  bindImgManager(sec);
+   bindImgManager(sec);
+  if(sec.key==='heroImages') bindHeroVideo();
   if(sec.key==='heroImages') bindHeroVideo();
 }
 function stats(){
   const portfolio=['prewedding','engagement','haldi','wedding','reception','candid'].reduce((s,k)=>s+(data[k]||[]).length,0);
   $('#stats').innerHTML=[
-    [(data.heroImages||[]).length,'Hero photos'],
+    [(data.heroImages||[]).length+(data.heroVideo?' + video':''),'Hero media'],
     [portfolio,'Portfolio photos'],[(data.videos||[]).length,'Films'],[(data.snapshot||[]).length,'Strip photos']
   ].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+l+'</span></div>').join('');
 }
