@@ -862,7 +862,7 @@ function renderAll(){renderLogo();renderHero();renderAbout();renderPortfolio();r
 function renderLogo(){
   const l=(DATA.logo||[])[0]; if(!l) return;
   const html='<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography"><span class="lg-sub">Luxury Wedding Photographer</span>';
-  $('#navLogo').innerHTML=html; $('#navLogoQ').innerHTML=html; $('#navLogoT').innerHTML=html; $('#navLogoT').innerHTML=html;
+  $('#navLogo').innerHTML=html; $('#navLogoQ').innerHTML=html; $('#navLogoT').innerHTML=html; $('#ftLogo').innerHTML='<img src="'+esc(cld(l,'q_auto,f_auto,h_160'))+'" alt="Naveen Photography">';
 }
 
 /* HERO */
