@@ -178,6 +178,7 @@ const UPLOAD_PRESET = 'naveen photography';
 const JSONBIN_KEY   = '$2a$10$RjxthPmRs1dCJ7wC0eU1E.f8PvFhge/GSX0ls9nLNsCy0ABBHml5W';   // must match index.html
 const JSONBIN_ID    = '6aca009cac6210605a24e0de';
 const ADMIN_PASSWORD= 'naveenphotography2026';
+const LOGO_URL = 'https://res.cloudinary.com/ycleboim/image/upload/v1794374670/naveen-photography/logo/zqpmtwfmp0kxnknll5wg.png';  
 
 const MAX_CAT=12, MAX_HERO=10, MAX_SNAP=24, MAX_VIDEOS=8;
 
@@ -203,8 +204,8 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cld=(u,t)=>(u&&u.includes('/upload/'))?u.replace('/upload/','/upload/'+t+'/'):u;
 function setLogo(){
-  const l=(data.logo||[])[0];
-  const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography"><span class="lg-sub">Luxury Wedding Photographer</span>':'<span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span>';
+   const l=LOGO_URL||(data.logo||[])[0];
+  const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography">':'<span class="lg-name">Naveen <b>·</b> Photography</span>';
   $('#adminLogo').innerHTML=html; $('#loginLogo').innerHTML=html;
 }
 (async()=>{try{const r=await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest',{headers:{'X-Master-Key':JSONBIN_KEY}});const rec=(await r.json()).record||{};data.logo=rec.logo||[];setLogo();}catch(e){}})();
