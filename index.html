@@ -9,6 +9,7 @@
 <meta property="og:description" content="Candid • Cinematic • Emotional. Capturing Love. Emotion. Legacy.">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -82,6 +83,16 @@ nav.top{position:fixed;top:0;left:0;right:0;z-index:500;height:80px;padding:0 32
 .btn-quote{position:relative;font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:700;color:#1a1000;text-decoration:none;padding:16px 36px;border-radius:100px;white-space:nowrap;cursor:pointer;background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 55%,#c08020 100%);box-shadow:0 0 0 1px rgba(212,160,48,.5),0 6px 24px rgba(212,160,48,.55),inset 0 1px 0 rgba(255,255,255,.3);transition:all .3s;border:0;display:inline-flex;align-items:center;gap:8px}
 .btn-quote::before{content:'';position:absolute;inset:-6px;border-radius:100px;background:radial-gradient(rgba(240,208,80,.5),transparent 68%);filter:blur(10px);z-index:-1;animation:glow 2.2s ease-in-out infinite}
 .btn-quote:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 0 1px rgba(212,160,48,.7),0 10px 36px rgba(212,160,48,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+
+/* HERO COVERFLOW */
+.hero2{background:#0c0a06;padding:110px 0 56px;overflow:hidden;text-align:center}
+.heroSwiper{width:100%;padding-bottom:44px}
+.heroSwiper .swiper-slide{width:min(72vw,420px)}
+.heroSwiper img,.hs-ph{width:100%;height:min(66vh,580px);object-fit:cover;display:block}
+.hs-ph{background:var(--ap) center/40% no-repeat,radial-gradient(ellipse at 50% 30%,#3d5f2a,#1e1b14 80%)}
+.heroSwiper .swiper-pagination-bullet{background:#fff;opacity:.45}
+.heroSwiper .swiper-pagination-bullet-active{background:var(--gold);opacity:1}
+.hs-btns{padding:0 24px}
 
 /* SHARED */
 .tag{font-size:9px;letter-spacing:.55em;text-transform:uppercase;color:var(--rose);font-weight:400;display:block;margin-bottom:14px}
@@ -528,11 +539,12 @@ footer.ft-main::before{content:'';position:absolute;inset:0;pointer-events:none;
     <a href="#terms">Terms</a><a href="#quote" class="mob-quote">&#10022; Get a Quote</a>
   </div>
 
-  <section class="hero" id="top">
-    <div class="hero-bg ambient" id="heroBg"></div>
-    <div class="hero-vig"></div><div class="hero-vig2"></div>
-    <span class="vf a"></span><span class="vf b"></span><span class="vf c"></span><span class="vf d"></span>
-    <div class="hero-content">
+<section class="hero2" id="top">
+    <div class="swiper heroSwiper">
+      <div class="swiper-wrapper" id="heroSlides"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="hs-btns">
       <div class="hero-btns">
         <div class="hero-btns-top">
           <a href="#portfolio" class="btn-maroon">View Portfolio</a>
@@ -768,6 +780,7 @@ footer.ft-main::before{content:'';position:absolute;inset:0;pointer-events:none;
   <div class="lb-b lb-x" id="lbX">✕</div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 /* ═══════════════ CONFIG — edit these ═══════════════ */
 const JSONBIN_KEY = '$2a$10$RjxthPmRs1dCJ7wC0eU1E.f8PvFhge/GSX0ls9nLNsCy0ABBHml5W';   // same bin as admin.html
@@ -866,21 +879,25 @@ function renderLogo(){
 }
 
 /* HERO */
-let heroTimer;
+let heroSwiper;
 function renderHero(){
-  const bg=$('#heroBg'); bg.innerHTML=''; clearInterval(heroTimer);
-  const mob=window.matchMedia('(max-width:768px)').matches;
-  const vid=(mob&&DATA.heroVideoMobile)?DATA.heroVideoMobile:(DATA.heroVideo||DATA.heroVideoMobile);
-  if(vid){
-    bg.classList.remove('ambient');
-    const v=document.createElement('video'); v.src=cld(vid,'q_auto'); v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true; v.setAttribute('playsinline',''); v.preload='auto';
-    bg.appendChild(v); v.play().catch(()=>{}); return;
+  const imgs=(DATA.heroImages||[]).filter(Boolean), box=$('#heroSlides');
+  if(!imgs.length){
+    box.innerHTML=Array(7).fill('<div class="swiper-slide"><div class="hs-ph"></div></div>').join('');
+  } else {
+    let list=imgs.slice(); while(list.length<7) list=list.concat(imgs);
+    box.innerHTML=list.map(u=>'<div class="swiper-slide"><img src="'+esc(cld(u,'q_auto,f_auto,w_1000'))+'" alt=""></div>').join('');
   }
-  const imgs=(DATA.heroImages||[]).filter(Boolean);
-  if(!imgs.length) return;
-  bg.classList.remove('ambient');
-  imgs.forEach((u,i)=>{const d=document.createElement('div');d.className='slide'+(i===0?' on':'');d.style.backgroundImage='url("'+cld(u,'q_auto,f_auto,w_1920')+'")';bg.appendChild(d);});
-  if(imgs.length>1){let i=0;const s=bg.querySelectorAll('.slide');heroTimer=setInterval(()=>{s[i].classList.remove('on');i=(i+1)%s.length;s[i].classList.add('on');},6000);}
+  if(heroSwiper) heroSwiper.destroy(true,true);
+  heroSwiper=new Swiper('.heroSwiper',{
+    pagination:{el:'.heroSwiper .swiper-pagination'},
+    effect:'coverflow',
+    grabCursor:true,
+    slidesPerView:'auto',
+    centeredSlides:true,
+    loop:true,
+    coverflowEffect:{slideShadows:false,rotate:40,depth:300}
+  });
 }
 
 /* ABOUT */
