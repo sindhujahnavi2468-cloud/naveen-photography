@@ -164,7 +164,7 @@ button{font-family:inherit}
 <div id="app" hidden>
   <div class="top" style="background:#fff;color:#8a7a78;height:76px;overflow:hidden;border-bottom:1px solid rgba(74,21,34,.12)">
     <span class="logo" id="adminLogo"><span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span></span>
-    <div class="r"><span id="saved">Not saved yet this session</span><button onclick="logout()">Sign out</button></div>
+    <div class="r"><span id="saved">Not saved yet this session</span><button onclick="logout()" style="color:#4a1522;border:1px solid rgba(74,21,34,.25);background:none">Sign out</button></div>
   </div>
   <div class="body">
     <div class="head">
@@ -215,7 +215,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const cld=(u,t)=>(u&&u.includes('/upload/'))?u.replace('/upload/','/upload/'+t+'/'):u;
 function setLogo(){
    const l=LOGO_URL||(data.logo||[])[0];
-  const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography">':'<span class="lg-name">Naveen <b>·</b> Photography</span>';
+    const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography" style="height:48px;width:auto;max-width:240px;object-fit:contain;display:block">':'<span style="font-family:\'DM Serif Display\',serif;font-style:italic;font-size:24px;color:#4a1522">Naveen · Photography</span>';
   $('#adminLogo').innerHTML=html; $('#loginLogo').innerHTML=html;
 }
 (async()=>{try{const r=await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest',{headers:{'X-Master-Key':JSONBIN_KEY}});const rec=(await r.json()).record||{};data.logo=rec.logo||[];setLogo();}catch(e){}})();
