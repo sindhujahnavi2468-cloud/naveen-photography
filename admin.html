@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Naveen Photography — Admin</title>
+<title>Vows by Naveen Suddala — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -152,7 +152,7 @@ button{font-family:inherit}
 
 <div id="login">
   <div class="lbox">
-    <div class="lbox-logo" id="loginLogo"><span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span></div>
+    <div class="lbox-logo" id="loginLogo"><span class="lg-name">Vows <b>by</b> Naveen Suddala</span><span class="lg-sub">Luxury Wedding Photographer</span></div>
     <p>Admin sign-in</p>
     <label for="pw">Password</label>
     <input id="pw" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
@@ -163,7 +163,7 @@ button{font-family:inherit}
 
 <div id="app" hidden>
   <div class="top" style="background:#fff;color:#8a7a78;height:76px;overflow:hidden;border-bottom:1px solid rgba(74,21,34,.12)">
-    <span class="logo" id="adminLogo"><span class="lg-name">Naveen <b>·</b> Photography</span><span class="lg-sub">Luxury Wedding Photographer</span></span>
+    <span class="logo" id="adminLogo"><span class="lg-name">Vows <b>by</b> Naveen Suddala</span><span class="lg-sub">Luxury Wedding Photographer</span></span>
     <div class="r"><span id="saved">Not saved yet this session</span><button onclick="logout()" style="color:#4a1522;border:1px solid rgba(74,21,34,.25);background:none">Sign out</button></div>
   </div>
   <div class="body">
@@ -184,7 +184,7 @@ button{font-family:inherit}
 <script>
 /* ═══════════════ CONFIG — edit these ═══════════════ */
 const CLOUD_NAME    = 'ycleboim';
-const UPLOAD_PRESET = 'naveen photography';
+const UPLOAD_PRESET = 'Vows by Naveen Suddala';
 const JSONBIN_KEY   = '$2a$10$RjxthPmRs1dCJ7wC0eU1E.f8PvFhge/GSX0ls9nLNsCy0ABBHml5W';   // must match index.html
 const JSONBIN_ID    = '6aca009cac6210605a24e0de';
 const ADMIN_PASSWORD= 'naveenphotography2026';
@@ -215,7 +215,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const cld=(u,t)=>(u&&u.includes('/upload/'))?u.replace('/upload/','/upload/'+t+'/'):u;
 function setLogo(){
    const l=LOGO_URL||(data.logo||[])[0];
-    const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Naveen Photography" style="height:48px;width:auto;max-width:240px;object-fit:contain;display:block">':'<span style="font-family:\'DM Serif Display\',serif;font-style:italic;font-size:24px;color:#4a1522">Naveen · Photography</span>';
+    const html=l?'<img src="'+esc(cld(l,'q_auto,f_auto,h_120'))+'" alt="Vows by Naveen Suddala" style="height:48px;width:auto;max-width:240px;object-fit:contain;display:block">':'<span style="font-family:\'DM Serif Display\',serif;font-style:italic;font-size:24px;color:#4a1522">Vows by Naveen Suddala</span>';
   $('#adminLogo').innerHTML=html; $('#loginLogo').innerHTML=html;
 }
 (async()=>{try{const r=await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest',{headers:{'X-Master-Key':JSONBIN_KEY}});const rec=(await r.json()).record||{};data.logo=rec.logo||[];setLogo();}catch(e){}})();
